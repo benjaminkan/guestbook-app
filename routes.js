@@ -1,16 +1,17 @@
 var express = require("express");
 var app = express();
 var fs = require("fs");
-
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("guestbook/"));
 
+// Home page
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
+// Guestbook page
 app.get("/guestbook", function (req, res) {
     var data = require("./json_guestbook_data.json");
 
@@ -93,6 +94,7 @@ app.get("/guestbook", function (req, res) {
     </html>` + results);
 });
 
+// New message page
 app.get("/newmessage", function (req, res) {
     res.sendFile(__dirname + "/newmessage.html");
 });
@@ -124,7 +126,6 @@ app.get("*", function (req, res) {
     res.sendFile(__dirname + "/404.html");
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, function () {
-    console.log("Guestbook app listening on port 8080!");
-});
+const port = process.env.PORT || 8081;
+app.listen(port);
+console.log("Guestbook app listening on port 8081!");
