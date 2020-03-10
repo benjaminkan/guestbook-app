@@ -79,13 +79,13 @@ app.get("/guestbook", function (req, res) {
         <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:8080/">Home</a>
+                    <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:8080/newmessage">Add entry</a>
+                    <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/newmessage">Add entry</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="http://127.0.0.1:8080/guestbook">View guestbook</a>
+                    <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/guestbook">View guestbook</a>
                 </li>
             </ul>
         </nav>

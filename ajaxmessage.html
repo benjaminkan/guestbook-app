@@ -34,7 +34,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/">Home</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/newmessage">Add entry</a>
             </li>
             <li class="nav-item">
@@ -44,7 +44,7 @@
     </nav>
     <br>
     <h1>Guestbook Application Form</h1>
-    <form class="was-validated" method="POST" actions="/newmessage">
+    <form class="was-validated" method="POST" actions="/ajaxmessage">
         <div class="form-group">
             <label for="username">Name:</label>
             <input type="text" class="form-control" name="username" placeholder="Enter name" name="username" required>
@@ -57,8 +57,42 @@
             <label for="message">Message:</label>
             <input type="text" class="form-control" name="message" placeholder="Enter message" name="message" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="getMessages('json_guestbook_data.json')">Submit</button>
     </form>
+
+    <script>
+        function getMessages() {
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send()
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readystatechange == 4 && xmlhttp.status == 200) {
+                    var xmlDoc = xmlhttp.responseXML;
+                    username = xmlDoc.getElementsByTagName("username");
+                    country = xmlDoc.getElementsByTagName("country");
+                    message = xmlDoc.getElementsByTagName("message");
+                    date = xmlDoc.getElementsByTagName("date");
+
+                    var out = '<table border="1">';
+                    for (i = 0; i < username.length; i++) {
+                        out += '<tr>';
+                        out += '<td>' + username[i].childNodes[0].nodeValue + '</td>';
+                        out += '<td>' + country[i].childNodes[0].nodeValue + '</td>';
+                        out += '<td>' + message[i].childNodes[0].nodeValue + '</td>';
+                        out += '<td>' + date[i].childNodes[0].nodeValue + '</td>';
+                        out += '</tr>';
+                    }
+                    out += '</table>';
+
+                    document.getElementById("messages").innerHTML = out;
+                }
+            }
+        }
+
+    </script>
+
+    <div id="messages"></div>
 
 </body>
 
