@@ -1,0 +1,15 @@
+{
+  "name": "guestbook-app",
+  "version": "1.0.0",
+  "description": "Guestbook application",
+  "main": "routes.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "start": "node routes.js",
+    "test": "node test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

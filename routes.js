@@ -124,6 +124,7 @@ app.get("*", function (req, res) {
     res.sendFile(__dirname + "/404.html");
 });
 
-app.listen(8080, function () {
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, function () {
     console.log("Guestbook app listening on port 8080!");
 });
