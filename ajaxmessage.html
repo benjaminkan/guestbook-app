@@ -47,49 +47,48 @@
     <form class="was-validated" method="POST" actions="/ajaxmessage">
         <div class="form-group">
             <label for="username">Name:</label>
-            <input type="text" class="form-control" name="username" placeholder="Enter name" name="username" required>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter name" name="username" required>
         </div>
         <div class="form-group">
             <label for="country">Country:</label>
-            <input type="text" class="form-control" name="country" placeholder="Enter country" name="country" required>
+            <input type="text" class="form-control" id="country" name="country" placeholder="Enter country" name="country" required>
         </div>
         <div class="form-group">
             <label for="message">Message:</label>
-            <input type="text" class="form-control" name="message" placeholder="Enter message" name="message" required>
+            <input type="text" class="form-control" id="message" name="message" placeholder="Enter message" name="message" required>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="getMessages('json_guestbook_data.json')">Submit</button>
+        <button type="submit" class="btn btn-primary" id="button1">Submit</button>
     </form>
 
     <script>
-        function getMessages() {
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send()
+        
+        window.onload = event => {
 
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readystatechange == 4 && xmlhttp.status == 200) {
-                    var xmlDoc = xmlhttp.responseXML;
-                    username = xmlDoc.getElementsByTagName("username");
-                    country = xmlDoc.getElementsByTagName("country");
-                    message = xmlDoc.getElementsByTagName("message");
-                    date = xmlDoc.getElementsByTagName("date");
+            var nappi = document.getElementById("button1");
 
-                    var out = '<table border="1">';
-                    for (i = 0; i < username.length; i++) {
-                        out += '<tr>';
-                        out += '<td>' + username[i].childNodes[0].nodeValue + '</td>';
-                        out += '<td>' + country[i].childNodes[0].nodeValue + '</td>';
-                        out += '<td>' + message[i].childNodes[0].nodeValue + '</td>';
-                        out += '<td>' + date[i].childNodes[0].nodeValue + '</td>';
-                        out += '</tr>';
-                    }
-                    out += '</table>';
+            nappi.addEventListener("click", () => {
+                var username = document.getElementById("username").value;
+                var country = document.getElementById("country").value;
+                var message = document.getElementById("message").value;
+                
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("messages").innerHTML = this.responseText;
+                        console.log(this.responseText);
+                    }  
+                };
 
-                    document.getElementById("messages").innerHTML = out;
-                }
-            }
-        }
+                xmlhttp.open("POST", "/ajaxmessage", true);
+                xmlhttp.setRequestHeader(
+                    "Content-type",
+                    "application/x-www-form-urlencoded"
+                );
+                xmlhttp.send("username=" + username + "&country=" + country + "&message=" + message);
+            });
+        };
 
+       
     </script>
 
     <div id="messages"></div>

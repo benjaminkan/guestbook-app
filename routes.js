@@ -118,8 +118,16 @@ app.post("/newmessage", function (req, res) {
     res.sendFile(__dirname + "/messagesent.html");
 });
 
-app.get("/ajaxmessage", function (req, res) {
-    res.sendFile(__dirname + "/ajaxmessage.html");
+
+app.post("/ajaxmessage", function(req, res) {
+    var data = require("./json_guestbook_data.json");
+
+    data.push({
+        "username": req.body.username,
+        "country": req.body.country,
+        "message": req.body.message,
+        "date": new Date()
+    });
 });
 
 app.get("*", function (req, res) {
