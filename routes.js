@@ -45,6 +45,7 @@ app.get("/guestbook", function (req, res) {
     results += "</tbody>"
     "</table>";
 
+    // better way to do this?
     res.send(`<!doctype html>
     <html class="no-js" lang="">
     
@@ -118,7 +119,7 @@ app.post("/newmessage", function (req, res) {
     res.sendFile(__dirname + "/messagesent.html");
 });
 
-/* not working
+/* Ajax message not working
 
 app.get("/ajaxmessage", function (req, res) {
     res.sendFile(__dirname + "/ajaxmessage.html");
