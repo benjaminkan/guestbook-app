@@ -79,13 +79,13 @@ app.get("/guestbook", function (req, res) {
         <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/newmessage">Add entry</a>
+                    <a class="nav-link" href="/newmessage">Add entry</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="https://expressguestbookapp.herokuapp.com/guestbook">View guestbook</a>
+                    <a class="nav-link" href="/guestbook">View guestbook</a>
                 </li>
             </ul>
         </nav>
@@ -118,8 +118,11 @@ app.post("/newmessage", function (req, res) {
     res.sendFile(__dirname + "/messagesent.html");
 });
 
+app.get("/ajaxmessage", function (req, res) {
+    res.sendFile(__dirname + "/ajaxmessage.html");
+});
 
-app.post("/ajaxmessage", function(req, res) {
+app.post("/ajaxmessage", function (req, res) {
     var data = require("./json_guestbook_data.json");
 
     data.push({
