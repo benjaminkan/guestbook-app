@@ -118,6 +118,8 @@ app.post("/newmessage", function (req, res) {
     res.sendFile(__dirname + "/messagesent.html");
 });
 
+/* not working
+
 app.get("/ajaxmessage", function (req, res) {
     res.sendFile(__dirname + "/ajaxmessage.html");
 });
@@ -139,6 +141,7 @@ app.post("/ajaxmessage", function (req, res) {
         console.log("Message sent!");
     });
 });
+*/
 
 app.get("*", function (req, res) {
     res.sendFile(__dirname + "/404.html");
