@@ -131,6 +131,13 @@ app.post("/ajaxmessage", function (req, res) {
         "message": req.body.message,
         "date": new Date()
     });
+
+    var jsonStr = JSON.stringify(data);
+
+    fs.writeFile("./json_guestbook_data.json", jsonStr, err => {
+        if (err) throw err;
+        console.log("Message sent!");
+    });
 });
 
 app.get("*", function (req, res) {

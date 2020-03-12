@@ -74,6 +74,13 @@
                 var country = document.getElementById("country").value;
                 var message = document.getElementById("message").value;
 
+                var data = {
+                    username: username,
+                    country: country,
+                    message: message,
+                    date: new Date()
+                };
+
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
